@@ -2,6 +2,7 @@ version: 0.2
 
 env:
   variables:
+    SAM_BUCKET: ionah-stag-sharp-heic-lambda-layer
     NODE_ENV: production
     DISABLE_OPENCOLLECTIVE: true
     SAM_CLI_TELEMETRY: 0
@@ -21,7 +22,7 @@ phases:
   post_build:
     commands:
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi" # check if build was successful. exit otherwise.
-      - npm run deploy
+      - SAM_BUCKET=ionah-stag-sharp-heic-lambda-layer npm run deploy
 artifacts:
   files:
     - .aws-sam/**/*
